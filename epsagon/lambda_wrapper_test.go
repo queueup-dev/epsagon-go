@@ -66,9 +66,8 @@ var _ = Describe("lambda_wrapper", func() {
 			It("Adds an Event, Trigger and calls handler", func() {
 				called := false
 				wrapper := &epsagonLambdaWrapper{
-					config:  &Config{},
-					handler: makeGenericHandler(func() { called = true }),
-					tracer:  tracer.GlobalTracer,
+					handler:                  makeGenericHandler(func() { called = true }),
+					epsagonLambdaWrapperBase: epsagonLambdaWrapperBase{config: &Config{}, tracer: tracer.GlobalTracer},
 				}
 
 				ctx := context.Background()
@@ -96,9 +95,8 @@ var _ = Describe("lambda_wrapper", func() {
 					Exceptions: &exceptions,
 				}
 				wrapper = &epsagonLambdaWrapper{
-					config:  &Config{},
-					handler: makeGenericHandler(func() { called = true }),
-					tracer:  tracer.GlobalTracer,
+					handler:                  makeGenericHandler(func() { called = true }),
+					epsagonLambdaWrapperBase: epsagonLambdaWrapperBase{config: &Config{}, tracer: tracer.GlobalTracer},
 				}
 			})
 			Context("Failed to add event", func() {
